@@ -11,5 +11,8 @@ import org.testng.Assert;
  */
 public class TestCases extends TestBase {
 
-	
+	@Test
+	private void TC01() {
+		
+	}
 }
