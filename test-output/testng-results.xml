@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="2" total="3" passed="1" failed="0" skipped="0">
+<testng-results ignored="4" total="5" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2018-02-07T08:55:22Z" name="Default suite" finished-at="2018-02-07T08:55:30Z" duration-ms="7765">
+  <suite started-at="2018-02-07T10:04:31Z" name="Default suite" finished-at="2018-02-07T10:04:47Z" duration-ms="16187">
     <groups>
     </groups>
-    <test started-at="2018-02-07T08:55:22Z" name="Default test" finished-at="2018-02-07T08:55:30Z" duration-ms="7765">
+    <test started-at="2018-02-07T10:04:31Z" name="Default test" finished-at="2018-02-07T10:04:47Z" duration-ms="16187">
       <class name="Dashboard.TestCases">
-        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:Dashboard.TestCases@68e5eea7]" started-at="2018-02-07T15:55:22Z" name="beforeMethod" finished-at="2018-02-07T15:55:27Z" duration-ms="4740" status="PASS">
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:Dashboard.TestCases@68e5eea7]" started-at="2018-02-07T17:04:31Z" name="beforeMethod" finished-at="2018-02-07T17:04:36Z" duration-ms="5335" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeMethod -->
-        <test-method signature="DA_LOGIN_TC002()[pri:0, instance:Dashboard.TestCases@68e5eea7]" started-at="2018-02-07T15:55:27Z" name="DA_LOGIN_TC002" finished-at="2018-02-07T15:55:29Z" duration-ms="2335" status="PASS">
+        <test-method signature="DA_LOGIN_TC009()[pri:0, instance:Dashboard.TestCases@68e5eea7]" started-at="2018-02-07T17:04:36Z" name="DA_LOGIN_TC009" finished-at="2018-02-07T17:04:46Z" duration-ms="10006" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- DA_LOGIN_TC002 -->
-        <test-method is-config="true" signature="afterMethod()[pri:0, instance:Dashboard.TestCases@68e5eea7]" started-at="2018-02-07T15:55:29Z" name="afterMethod" finished-at="2018-02-07T15:55:30Z" duration-ms="653" status="PASS">
+        </test-method> <!-- DA_LOGIN_TC009 -->
+        <test-method is-config="true" signature="afterMethod()[pri:0, instance:Dashboard.TestCases@68e5eea7]" started-at="2018-02-07T17:04:46Z" name="afterMethod" finished-at="2018-02-07T17:04:47Z" duration-ms="796" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterMethod -->

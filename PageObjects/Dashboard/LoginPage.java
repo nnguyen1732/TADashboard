@@ -49,13 +49,13 @@ public class LoginPage {
 			return this;
 		}
 		
-		public GeneralPage Login(REPO Repo, Account validId, Account validPass) {
+		public MainPage Login(REPO Repo, Account validId, Account validPass) {
 			Utilities.waitElement(cbbRepo);
 			this.selectCbbRepository().selectByVisibleText(Repo.getValue());
 			this.getTxtID().sendKeys(validId.getValue());
 			this.getTxtPW().sendKeys(validPass.getValue());
 			this.getBtnLogin().click();	
-			return new GeneralPage();
+			return new MainPage();
 		}
 		
 		

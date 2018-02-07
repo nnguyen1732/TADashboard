@@ -46,6 +46,11 @@ public class Utilities {
 				.until(ExpectedConditions.presenceOfElementLocated(element));
 	}
 
+	public static void waitElementNotExit(By element) {
+		new WebDriverWait(Constant.WEBDRIVER, Timeout.wait_time.getValue())
+		.until(ExpectedConditions.invisibilityOfElementLocated(element));
+	}
+	
 	// check element exist or not
 	public static boolean checkElementExist(By element) {
 		if (Constant.WEBDRIVER.findElement(element).isDisplayed()) {
@@ -62,7 +67,7 @@ public class Utilities {
 	
 	//get browser form message
 	public static String getBrowserFormMsg() {
-		WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, Constant.Timeout.wait_time.getValue());
+		WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, Constant.Timeout.short_time.getValue());
 		wait.until(ExpectedConditions.alertIsPresent());
 		return Constant.WEBDRIVER.switchTo().alert().getText();
 	}
