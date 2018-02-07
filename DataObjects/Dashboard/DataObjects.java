@@ -23,7 +23,7 @@ public class DataObjects {
 	}
 	
 	public static enum Account {
-		VALID_ID("administrator"), VALID_PASS("") ;
+		VALID_ID("administrator"), VALID_PASS(""), INVALID_ID("Test"), INVALID_PASS("123") ;
 		private final String user;
 
 		Account(final String username) {

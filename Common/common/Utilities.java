@@ -57,5 +57,10 @@ public class Utilities {
 		WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, timeout);
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 	}
+	
+	//get browser form message
+	public static String getErrorFormMsg() {
+		return Constant.WEBDRIVER.switchTo().alert().getText();
+	}
 
 }

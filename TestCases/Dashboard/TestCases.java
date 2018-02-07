@@ -31,12 +31,15 @@ public class TestCases extends TestBase {
 		System.out.println(
 				"STP_AC_TR002_Verify user fails to log in specific repository via Dashboard login page with incorrect credentials");
 		/**
-		 * step 1: Navigate Dashboard login page step 2: Select repository step 3:Enter
-		 * valid username and password step 4:Click on "Login" button Verify Dashboard
-		 * Mainpage appears
+		 * step 1: Navigate Dashboard login page 
+		 * step 2: Select repository 
+		 * step 3:Enter valid username and password 
+		 * step 4:Click on "Login" button Verify Dashboard Mainpage appears
 		 */
 		LoginPage login = new LoginPage();
-		GeneralPage generalpage = login.open().Login(REPO.SP, Account.VALID_ID, Account.VALID_PASS);
-		Assert.assertEquals(generalpage.getProfileText(), Account.VALID_ID.getValue(), "User login failed");
+		login.open().Login(REPO.SP, Account.INVALID_ID, Account.INVALID_PASS);
+		String ActualMsg = Utilities.getErrorFormMsg();
+		String ExpectedMsg = "Username or password is invalid";
+		Assert.assertEquals(ActualMsg, ExpectedMsg, "The message message is not displayed as expected ");
 	}
 }

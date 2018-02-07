@@ -57,5 +57,7 @@ public class LoginPage {
 			this.getBtnLogin().click();	
 			return new GeneralPage();
 		}
+		
+		
 
 }
