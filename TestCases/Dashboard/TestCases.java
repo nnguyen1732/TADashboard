@@ -42,4 +42,32 @@ public class TestCases extends TestBase {
 		String ExpectedMsg = "Username or password is invalid";
 		Assert.assertEquals(ActualMsg, ExpectedMsg, "The message message is not displayed as expected ");
 	}
+	
+	@Test
+	private void DA_LOGIN_TC004() {
+		System.out.println(
+				"STP_AC_TR004_Verify user is able to log in different repositories successfully after logging out current repository");
+		/**
+		 * step 1: Navigate Dashboard login page step 2: Select repository step 3:Enter
+		 * valid username and password step 4:Click on "Login" button
+		 * Mainpage appears
+		 * step 5: Click on "Logout" button
+		 * step 6: Select a different repository Dashboard
+		 * step 7: Enter valid username and password
+		 * step 8: Click on "Login" button
+		 * step 9: Verify Dashboard Mainpage appears
+		 */
+		LoginPage login = new LoginPage();
+		GeneralPage generalpage = login.open().Login(REPO.SP, Account.VALID_ID, Account.VALID_PASS);
+		//Assert.assertEquals(generalpage.getProfileText(), Account.VALID_ID.getValue(), "User login failed");
+		
+		generalpage.lblProfileName().click();
+		generalpage.getBtnLogOut().click();
+		
+		login.open().Login(REPO.SP, Account.VALID_ID, Account.VALID_PASS);		
+	
+		
+		//Constant.WEBDRIVER.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		
+	}
 }
