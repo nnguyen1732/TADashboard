@@ -45,7 +45,7 @@ public class LoginPage {
 			
 		public LoginPage open() {
 			// TODO Auto-generated constructor stub
-			Constant.WEBDRIVER.navigate().to(Constant.DASHBOARD_URL);
+			Constant.WEBDRIVER.navigate().to(Constant.DASHBOARD_URL);;
 			return this;
 		}
 		

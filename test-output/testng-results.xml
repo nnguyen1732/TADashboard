@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2018-02-07T03:10:41Z" name="Default suite" finished-at="2018-02-07T03:10:52Z" duration-ms="10606">
+    <groups>
+    </groups>
+    <test started-at="2018-02-07T03:10:41Z" name="Default test" finished-at="2018-02-07T03:10:52Z" duration-ms="10606">
+      <class name="Dashboard.TestCases">
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:Dashboard.TestCases@6ab778a]" started-at="2018-02-07T10:10:41Z" name="beforeMethod" finished-at="2018-02-07T10:10:48Z" duration-ms="7000" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="TC01()[pri:0, instance:Dashboard.TestCases@6ab778a]" started-at="2018-02-07T10:10:48Z" name="TC01" finished-at="2018-02-07T10:10:51Z" duration-ms="2430" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC01 -->
+        <test-method is-config="true" signature="afterMethod()[pri:0, instance:Dashboard.TestCases@6ab778a]" started-at="2018-02-07T10:10:51Z" name="afterMethod" finished-at="2018-02-07T10:10:52Z" duration-ms="1118" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+      </class> <!-- Dashboard.TestCases -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
