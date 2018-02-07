@@ -5,7 +5,9 @@ package common;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -59,8 +61,13 @@ public class Utilities {
 	}
 	
 	//get browser form message
-	public static String getErrorFormMsg() {
+	public static String getBrowserFormMsg() {
+		WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, Constant.Timeout.wait_time.getValue());
+		wait.until(ExpectedConditions.alertIsPresent());
 		return Constant.WEBDRIVER.switchTo().alert().getText();
 	}
-
+	
+	public static void clickPopup(){
+		Constant.WEBDRIVER.switchTo().alert().accept();
+	}
 }

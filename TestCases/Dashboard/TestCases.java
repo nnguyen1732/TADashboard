@@ -38,7 +38,8 @@ public class TestCases extends TestBase {
 		 */
 		LoginPage login = new LoginPage();
 		login.open().Login(REPO.SP, Account.INVALID_ID, Account.INVALID_PASS);
-		String ActualMsg = Utilities.getErrorFormMsg();
+		String ActualMsg = Utilities.getBrowserFormMsg();
+		Utilities.clickPopup();
 		String ExpectedMsg = "Username or password is invalid";
 		Assert.assertEquals(ActualMsg, ExpectedMsg, "The message message is not displayed as expected ");
 	}
