@@ -7,6 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import Dashboard.DataObjects.Account;
+import Dashboard.DataObjects.REPO;
 import common.Utilities;
 import constant.Constant;
 
@@ -47,11 +49,11 @@ public class LoginPage {
 			return this;
 		}
 		
-		public GeneralPage login() {
+		public GeneralPage login(REPO Repo, Account validId, Account validPass) {
 			Utilities.waitElement(cbbRepo);
-			this.selectCbbRepository().selectByVisibleText(DataObjects.REPO.SP.getValue());
-			this.getTxtID().sendKeys(Constant.USERNAME);
-			this.getTxtPW().sendKeys(Constant.PASSWORD);
+			this.selectCbbRepository().selectByVisibleText(Repo.getValue());
+			this.getTxtID().sendKeys(validId.getValue());
+			this.getTxtPW().sendKeys(validPass.getValue());
 			this.getBtnLogin().click();	
 			return new GeneralPage();
 		}
