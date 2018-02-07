@@ -10,7 +10,7 @@ package Dashboard;
 public class DataObjects {
 	
 	public static enum REPO {
-		SP("SampleRepository");
+		SP("SampleRepository"),DB("Dashboard");
 		private final String value;
 
 		REPO(final String newValue) {

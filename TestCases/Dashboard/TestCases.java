@@ -64,8 +64,8 @@ public class TestCases extends TestBase {
 		generalpage.lblProfileName().click();
 		generalpage.getBtnLogOut().click();
 		
-		login.open().Login(REPO.SP, Account.VALID_ID, Account.VALID_PASS);		
-	
+		generalpage = login.open().Login(REPO.DB, Account.VALID_ID, Account.VALID_PASS);		
+		Assert.assertEquals(generalpage.getProfileText(), Account.VALID_ID.getValue(), "User login failed");
 		
 		//Constant.WEBDRIVER.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
 		
