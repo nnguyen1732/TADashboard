@@ -128,4 +128,14 @@ public class TestCases extends TestBase {
 		Main.Logout();
 		Assert.assertEquals(ActualMsg, Account.TEST_ID.getValue(), "User login failed");
 	}
+	
+	@Test
+	private void DA_LOGIN_TC013() {
+		System.out.println("DA_LOGIN_TC012_Verify username with special characters is working correctly");
+		LoginPage login = new LoginPage();
+		MainPage Main = login.open().Login(REPO.SP, Account.SPCHARACTER_ID, Account.TEST_PASS);
+		String ActualMsg = Main.getProfileText();
+		Main.Logout();
+		Assert.assertEquals(ActualMsg, Account.TEST_ID.getValue(), "User login failed");
+	}
 }
