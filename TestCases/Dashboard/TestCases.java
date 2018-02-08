@@ -1,7 +1,15 @@
 package Dashboard;
 
+import Dashboard.TestData.*;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.collections.Lists;
+
 import Dashboard.DataObjects.*;
 import common.Utilities;
 
@@ -20,7 +28,7 @@ public class TestCases extends TestBase {
 		// step 3:Enter valid username and password
 		// step 4:Click on "Login" button Verify Dashboard Mainpage appears
 		LoginPage login = new LoginPage();
-		MainPage generalpage = login.open().Login(REPO.SP, Account.ID, Account.BLANK);
+		MainPage generalpage = login.open().Login(REPO.SP.getValue(), Account.ID.getValue(), Account.BLANK.getValue());
 		Assert.assertEquals(generalpage.getProfileText(), Account.ID.getValue(), "User login failed");
 	}
 
@@ -36,7 +44,7 @@ public class TestCases extends TestBase {
 		// Step 5: Verify Dashboard Error message "Username or password is invalid"
 
 		LoginPage login = new LoginPage();
-		login.open().Login(REPO.SP, Account.INVALID_ID, Account.INVALID_PASS);
+		login.open().Login(REPO.SP.getValue(), Account.INVALID_ID.getValue(), Account.INVALID_PASS.getValue());
 		String ActualMsg = Utilities.getBrowserFormMsg();
 		Utilities.clickPopup();
 		String ExpectedMsg = "Username or password is invalid";
@@ -53,7 +61,7 @@ public class TestCases extends TestBase {
 		// Step 4:Click on "Login" button
 		// Step 5: Verify Dashboard Error message "Username or password is invalid"
 		LoginPage login = new LoginPage();
-		login.open().Login(REPO.SP, Account.ID, Account.INVALID_PASS);
+		login.open().Login(REPO.SP.getValue(), Account.ID.getValue(), Account.INVALID_PASS.getValue());
 		String ActualMsg = Utilities.getBrowserFormMsg();
 		Utilities.clickPopup();
 		String ExpectedMsg = "Username or password is invalid";
@@ -72,10 +80,10 @@ public class TestCases extends TestBase {
 		 * button step 9: Verify Dashboard Mainpage appears
 		 */
 		LoginPage login = new LoginPage();
-		MainPage generalpage = login.open().Login(REPO.SP, Account.ID, Account.BLANK);
+		MainPage generalpage = login.open().Login(REPO.SP.getValue(), Account.ID.getValue(), Account.BLANK.getValue());
 		generalpage.lblProfileName().click();
 		generalpage.getBtnLogOut().click();
-		generalpage = login.open().Login(REPO.DB, Account.ID, Account.BLANK);
+		generalpage = login.open().Login(REPO.DB.getValue(), Account.ID.getValue(), Account.BLANK.getValue());
 		Assert.assertEquals(generalpage.getProfileText(), Account.ID.getValue(), "User login failed");
 	}
 
@@ -83,8 +91,8 @@ public class TestCases extends TestBase {
 	private void DA_LOGIN_TC009() {
 		System.out.println("DA_LOGIN_TC009	Verify \"Password\" input is case sensitive");
 		LoginPage login = new LoginPage();
-		MainPage Main = login.open().Login(REPO.SP, Account.TEST_ID, Account.TEST_PASS);
-		Main.Logout().Login(REPO.SP, Account.TEST_ID, Account.UPPER_TEST_PASS);
+		MainPage Main = login.open().Login(REPO.SP.getValue(), Account.TEST_ID.getValue(), Account.TEST_PASS.getValue());
+		Main.Logout().Login(REPO.SP.getValue(), Account.TEST_ID.getValue(), Account.UPPER_TEST_PASS.getValue());
 		String ActualMsg = Utilities.getBrowserFormMsg();
 		Utilities.clickPopup();
 		String ExpectedMsg = "Username or password is invalid";
@@ -95,9 +103,9 @@ public class TestCases extends TestBase {
 	private void DA_LOGIN_TC010() {
 		System.out.println("DA_LOGIN_TC010	Verify \"Username\" is not case sensitive");
 		LoginPage login = new LoginPage();
-		MainPage Main = login.open().Login(REPO.SP, Account.TEST_ID, Account.TEST_PASS);
+		MainPage Main = login.open().Login(REPO.SP.getValue(), Account.TEST_ID.getValue(), Account.TEST_PASS.getValue());
 		Assert.assertEquals(Main.getProfileText(), Account.TEST_ID.getValue(), "User login failed");
-		Main.Logout().Login(REPO.SP, Account.UPPER_TEST_ID, Account.TEST_PASS);
+		Main.Logout().Login(REPO.SP.getValue(), Account.UPPER_TEST_ID.getValue(), Account.TEST_PASS.getValue());
 		String ActualMsg = Main.getProfileText();
 		Main.Logout();
 		Assert.assertEquals(ActualMsg, Account.TEST_ID.getValue(), "User login failed");
@@ -107,9 +115,9 @@ public class TestCases extends TestBase {
 	private void DA_LOGIN_TC011() {
 		System.out.println("DA_LOGIN_TC011_Verify password with special characters is working correctly");
 		LoginPage login = new LoginPage();
-		MainPage Main = login.open().Login(REPO.SP, Account.TEST_ID, Account.TEST_PASS);
+		MainPage Main = login.open().Login(REPO.SP.getValue(), Account.TEST_ID.getValue(), Account.TEST_PASS.getValue());
 		Assert.assertEquals(Main.getProfileText(), Account.TEST_ID.getValue(), "User login failed");
-		Main.Logout().Login(REPO.SP, Account.UPPER_TEST_ID, Account.UPPER_TEST_PASS);
+		Main.Logout().Login(REPO.SP.getValue(), Account.UPPER_TEST_ID.getValue(), Account.UPPER_TEST_PASS.getValue());
 		String ActualMsg = Main.getProfileText();
 		Main.Logout();
 		Assert.assertEquals(ActualMsg, Account.TEST_ID.getValue(), "User login failed");
@@ -119,7 +127,7 @@ public class TestCases extends TestBase {
 	private void DA_LOGIN_TC012() {
 		System.out.println("DA_LOGIN_TC012_Verify username with special characters is working correctly");
 		LoginPage login = new LoginPage();
-		MainPage Main = login.open().Login(REPO.SP, Account.SPCHARACTER_ID, Account.TEST_PASS);
+		MainPage Main = login.open().Login(REPO.SP.getValue(), Account.SPCHARACTER_ID.getValue(), Account.TEST_PASS.getValue());
 		String ActualMsg = Main.getProfileText();
 		Main.Logout();
 		Assert.assertEquals(ActualMsg, Account.TEST_ID.getValue(), "User login failed");
@@ -130,9 +138,32 @@ public class TestCases extends TestBase {
 		System.out.println(
 				"DA_LOGIN_TC013_Verify the page works correctly for the case when no input entered to Password and Username field");
 		LoginPage login = new LoginPage();
-		login.open().Login(REPO.SP, Account.BLANK, Account.BLANK);
+		login.open().Login(REPO.SP.getValue(), Account.BLANK.getValue(), Account.BLANK.getValue());
 		String ActualMsg = Utilities.getBrowserFormMsg();
 		String ExpectedMsg = "Please enter username!";
 		Assert.assertEquals(ActualMsg, ExpectedMsg, "The message does not display as expected ");
+	}
+	
+	@Test
+	private void DA_LOGIN_TC014() {
+		System.out.println(
+				"DA_LOGIN_TC013_Verify the page works correctly for the case when no input entered to Password and Username field");
+		LoginPage login = new LoginPage();
+		login.open().Login(REPO.SP.getValue(), Account.BLANK.getValue(), Account.BLANK.getValue());
+		String ActualMsg = Utilities.getBrowserFormMsg();
+		String ExpectedMsg = "Please enter username!";
+		Assert.assertEquals(ActualMsg, ExpectedMsg, "The message does not display as expected ");
+	}
+	
+	@Test(dataProvider = "Login Authority", dataProviderClass = TestData.class)
+	private void DA_LOGIN_TC_TEST(String Repository, String username, String password, boolean ASD) {
+		//System.out.println(TCID);
+		// step 1: Navigate Dashboard login page
+		// step 2: Select repository
+		// step 3:Enter valid username and password
+		// step 4:Click on "Login" button Verify Dashboard Mainpage appears
+		LoginPage login = new LoginPage();
+		MainPage generalpage = login.open().Login(Repository, username, password);
+		Assert.assertEquals(generalpage.getProfileText(), Account.ID.getValue(), "User login failed");
 	}
 }

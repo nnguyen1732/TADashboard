@@ -49,15 +49,15 @@ public class LoginPage {
 		public LoginPage open() {
 			// TODO Auto-generated constructor stub
 			Constant.WEBDRIVER.navigate().to(Constant.DASHBOARD_URL);
-			//Utilities.waitElement(cbbRepo);
+			Utilities.waitElement(cbbRepo);
 			return this;
 		}
 		
-		public MainPage Login(REPO Repo, Account validId, Account validPass) {
+		public MainPage Login(String Repo, String ID, String password) {
 			Utilities.waitElement(btnLogin);
-			this.selectCbbRepository().selectByVisibleText(Repo.getValue());
-			this.getTxtID().sendKeys(validId.getValue());
-			this.getTxtPW().sendKeys(validPass.getValue());
+			this.selectCbbRepository().selectByVisibleText(Repo);
+			this.getTxtID().sendKeys(ID);
+			this.getTxtPW().sendKeys(password);
 			this.getBtnLogin().click();	
 			return new MainPage();
 		}

@@ -15,6 +15,7 @@ public class Constant {
 	public static final String DASHBOARD_URL = "http://localhost:54000/TADashboard";
 	public static final String USERNAME = "administration";
 	public static final String PASSWORD = "";
+	//public static final 
 
 	public static enum Timeout {
 		short_time(5), long_time(20), wait_time(1), milisecond_wait(200);

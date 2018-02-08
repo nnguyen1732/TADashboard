@@ -3,7 +3,13 @@
  */
 package Dashboard;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.collections.Lists;
 
 /**
  * @author an.son
@@ -11,8 +17,9 @@ import org.testng.annotations.DataProvider;
  */
 public class TestData {
 
-	@DataProvider(name = "LonginAuthority")
+	@DataProvider(name = "Login Authority")
 	public static Object[][] loginData() {
-		return new Object[][] { {"Administrator","","passed"},{"test","test", "failed"} };
+		return new Object[][] { {"SampleRepository", "Administrator", "", true },
+				{ "SampleRepository", "test", "test", false } };
 	}
 }
