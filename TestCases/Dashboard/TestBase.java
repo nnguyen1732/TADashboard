@@ -1,5 +1,8 @@
 package Dashboard;
 
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -14,7 +17,6 @@ public class TestBase {
 		System.out.println("Run beforeMethod");
 		System.setProperty("webdriver.chrome.driver", Utilities.getProjectPath() + "\\Executables\\chromedriver.exe");
 		Constant.WEBDRIVER = new ChromeDriver();
-		// Constant.WEBDRIVER.navigate().to(Constant.DASHBOARD_URL);
 		Constant.WEBDRIVER.manage().window().maximize();
 	}
 

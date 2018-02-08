@@ -20,7 +20,7 @@ public class TestCases extends TestBase {
 		// step 3:Enter valid username and password
 		// step 4:Click on "Login" button Verify Dashboard Mainpage appears
 		LoginPage login = new LoginPage();
-		MainPage generalpage = login.open().Login(REPO.SP, Account.ID, Account.PASS);
+		MainPage generalpage = login.open().Login(REPO.SP, Account.ID, Account.BLANK);
 		Assert.assertEquals(generalpage.getProfileText(), Account.ID.getValue(), "User login failed");
 	}
 
@@ -72,14 +72,10 @@ public class TestCases extends TestBase {
 		 * button step 9: Verify Dashboard Mainpage appears
 		 */
 		LoginPage login = new LoginPage();
-		MainPage generalpage = login.open().Login(REPO.SP, Account.ID, Account.PASS);
-		// Assert.assertEquals(generalpage.getProfileText(),
-		// Account.VALID_ID.getValue(), "User login failed");
-
+		MainPage generalpage = login.open().Login(REPO.SP, Account.ID, Account.BLANK);
 		generalpage.lblProfileName().click();
 		generalpage.getBtnLogOut().click();
-
-		generalpage = login.open().Login(REPO.DB, Account.ID, Account.PASS);
+		generalpage = login.open().Login(REPO.DB, Account.ID, Account.BLANK);
 		Assert.assertEquals(generalpage.getProfileText(), Account.ID.getValue(), "User login failed");
 	}
 
@@ -128,14 +124,15 @@ public class TestCases extends TestBase {
 		Main.Logout();
 		Assert.assertEquals(ActualMsg, Account.TEST_ID.getValue(), "User login failed");
 	}
-	
+
 	@Test
 	private void DA_LOGIN_TC013() {
-		System.out.println("DA_LOGIN_TC012_Verify username with special characters is working correctly");
+		System.out.println(
+				"DA_LOGIN_TC013_Verify the page works correctly for the case when no input entered to Password and Username field");
 		LoginPage login = new LoginPage();
-		MainPage Main = login.open().Login(REPO.SP, Account.SPCHARACTER_ID, Account.TEST_PASS);
-		String ActualMsg = Main.getProfileText();
-		Main.Logout();
-		Assert.assertEquals(ActualMsg, Account.TEST_ID.getValue(), "User login failed");
+		login.open().Login(REPO.SP, Account.BLANK, Account.BLANK);
+		String ActualMsg = Utilities.getBrowserFormMsg();
+		String ExpectedMsg = "Please enter username!";
+		Assert.assertEquals(ActualMsg, ExpectedMsg, "The message does not display as expected ");
 	}
 }
