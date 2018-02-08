@@ -6,7 +6,7 @@
       <class name="Dashboard.TestCases">
         <methods>
           <include name="beforeMethod"/>
-          <include name="DA_LOGIN_TC010"/>
+          <include name="DA_LOGIN_TC_TEST" invocation-numbers="0 1"/>
           <include name="afterMethod"/>
         </methods>
       </class> <!-- Dashboard.TestCases -->
