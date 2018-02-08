@@ -23,8 +23,9 @@ public class DataObjects {
 	}
 
 	public static enum Account {
-		ID("administrator"), PASS(""), INVALID_ID("Test"), INVALID_PASS("123"), TEST_ID(
-				"test"), TEST_PASS("test"), UPPER_TEST_PASS("TEST"), UPPER_TEST_ID("TEST"), SPCHARACTER_TEST_PASS("test@#");
+		ID("administrator"), PASS(""), INVALID_ID("Test"), INVALID_PASS("123"), TEST_ID("test"), TEST_PASS(
+				"test"), UPPER_TEST_PASS(
+						"TEST"), UPPER_TEST_ID("TEST"), SPCHARACTER_TEST_PASS("test@#"), SPCHARACTER_ID("test@!");
 		private final String user;
 
 		Account(final String username) {

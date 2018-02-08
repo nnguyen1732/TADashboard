@@ -6,8 +6,8 @@
       <class name="Dashboard.TestCases">
         <methods>
           <include name="beforeMethod"/>
+          <include name="DA_LOGIN_TC010"/>
           <include name="afterMethod"/>
-          <include name="DA_LOGIN_TC009"/>
         </methods>
       </class> <!-- Dashboard.TestCases -->
     </classes>

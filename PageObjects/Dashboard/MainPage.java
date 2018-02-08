@@ -3,14 +3,9 @@
  */
 package Dashboard;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import constant.Constant;
 import constant.Constant.*;
 import common.Utilities;
 
@@ -27,8 +22,7 @@ public class MainPage {
 		// TODO Auto-generated constructor stub
 		if (ExpectedConditions.alertIsPresent() == null)
 			Utilities.waitElement(ProfileName);
-		
-		
+
 	}
 
 	// element
