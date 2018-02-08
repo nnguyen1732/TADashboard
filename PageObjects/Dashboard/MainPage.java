@@ -27,11 +27,13 @@ public class MainPage {
 		// TODO Auto-generated constructor stub
 		if (ExpectedConditions.alertIsPresent() == null)
 			Utilities.waitElement(ProfileName);
+		
+		
 	}
 
 	// element
 	protected WebElement lblProfileName() {
-		return Utilities.findElement(ProfileName, Timeout.short_time.getValue());
+		return Utilities.findElement(ProfileName, Timeout.long_time.getValue());
 	}
 
 	protected WebElement getBtnLogOut() {
@@ -48,6 +50,7 @@ public class MainPage {
 	}
 
 	public LoginPage Logout() {
+		clickProfileName();
 		getBtnLogOut().click();
 		Utilities.waitElementNotExit(btnLogOut);
 		return new LoginPage();

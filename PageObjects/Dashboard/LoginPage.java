@@ -46,11 +46,12 @@ public class LoginPage {
 		public LoginPage open() {
 			// TODO Auto-generated constructor stub
 			Constant.WEBDRIVER.navigate().to(Constant.DASHBOARD_URL);
+			//Utilities.waitElement(cbbRepo);
 			return this;
 		}
 		
 		public MainPage Login(REPO Repo, Account validId, Account validPass) {
-			Utilities.waitElement(cbbRepo);
+			Utilities.waitElement(btnLogin);
 			this.selectCbbRepository().selectByVisibleText(Repo.getValue());
 			this.getTxtID().sendKeys(validId.getValue());
 			this.getTxtPW().sendKeys(validPass.getValue());

@@ -42,7 +42,7 @@ public class Utilities {
 
 	// wait for element refresh
 	public static void waitElement(By element) {
-		new WebDriverWait(Constant.WEBDRIVER, Timeout.wait_time.getValue())
+		new WebDriverWait(Constant.WEBDRIVER, Timeout.long_time.getValue())
 				.until(ExpectedConditions.presenceOfElementLocated(element));
 	}
 

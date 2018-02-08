@@ -97,7 +97,6 @@ public class TestCases extends TestBase {
 		// Step 5: Verify Dashboard Error message "Username or password is invalid"
 		LoginPage login = new LoginPage();
 		MainPage Main = login.open().Login(REPO.SP, Account.TEST_ID, Account.TEST_PASS);
-		Main.clickProfileName();
 		Main.Logout().Login(REPO.SP, Account.TEST_ID, Account.UPPER_TEST_PASS);
 		String ActualMsg = Utilities.getBrowserFormMsg();
 		Utilities.clickPopup();
@@ -116,8 +115,26 @@ public class TestCases extends TestBase {
 		LoginPage login = new LoginPage();
 		MainPage Main = login.open().Login(REPO.SP, Account.TEST_ID, Account.TEST_PASS);
 		Assert.assertEquals(Main.getProfileText(), Account.TEST_ID.getValue(), "User login failed");
-		Main.clickProfileName();
-		Main.Logout().Login(REPO.SP, Account.UPPER_TEST_ID, Account.UPPER_TEST_PASS);
+		Main.Logout().Login(REPO.SP, Account.UPPER_TEST_ID, Account.TEST_PASS);
+		String ActualMsg = Main.getProfileText();
+		Main.Logout();
+		Assert.assertEquals(ActualMsg, Account.TEST_ID.getValue(), "User login failed");
+	}
+	
+	@Test
+	private void DA_LOGIN_TC011() {
+		System.out.println("DA_LOGIN_TC011_Verify password with special characters is working correctly");
+		// Step 1:Navigate Dashboard login page
+		// Step 2:Select repository
+		// Step 3:Enter invalid username and password
+		// Step 4:Click on "Login" button
+		// Step 5: Verify Dashboard Error message "Username or password is invalid"
+		LoginPage login = new LoginPage();
+		MainPage Main = login.open().Login(REPO.SP, Account.TEST_ID, Account.TEST_PASS);
 		Assert.assertEquals(Main.getProfileText(), Account.TEST_ID.getValue(), "User login failed");
+		Main.Logout().Login(REPO.SP, Account.UPPER_TEST_ID, Account.UPPER_TEST_PASS);
+		String ActualMsg = Main.getProfileText();
+		Main.Logout();
+		Assert.assertEquals(ActualMsg, Account.TEST_ID.getValue(), "User login failed");
 	}
 }
