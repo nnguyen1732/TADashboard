@@ -21,8 +21,8 @@ public class TestCases extends TestBase {
 		// step 3:Enter valid username and password
 		// step 4:Click on "Login" button Verify Dashboard Mainpage appears
 		LoginPage login = new LoginPage();
-		MainPage generalpage = login.open().Login(REPO.SP, Account.VALID_ID, Account.VALID_PASS);
-		Assert.assertEquals(generalpage.getProfileText(), Account.VALID_ID.getValue(), "User login failed");
+		MainPage generalpage = login.open().Login(REPO.SP, Account.ID, Account.PASS);
+		Assert.assertEquals(generalpage.getProfileText(), Account.ID.getValue(), "User login failed");
 	}
 
 	@Test
@@ -54,7 +54,7 @@ public class TestCases extends TestBase {
 		// Step 4:Click on "Login" button
 		// Step 5: Verify Dashboard Error message "Username or password is invalid"
 		LoginPage login = new LoginPage();
-		login.open().Login(REPO.SP, Account.VALID_ID, Account.INVALID_PASS);
+		login.open().Login(REPO.SP, Account.ID, Account.INVALID_PASS);
 		String ActualMsg = Utilities.getBrowserFormMsg();
 		Utilities.clickPopup();
 		String ExpectedMsg = "Username or password is invalid";
@@ -73,15 +73,15 @@ public class TestCases extends TestBase {
 		 * button step 9: Verify Dashboard Mainpage appears
 		 */
 		LoginPage login = new LoginPage();
-		MainPage generalpage = login.open().Login(REPO.SP, Account.VALID_ID, Account.VALID_PASS);
+		MainPage generalpage = login.open().Login(REPO.SP, Account.ID, Account.PASS);
 		// Assert.assertEquals(generalpage.getProfileText(),
 		// Account.VALID_ID.getValue(), "User login failed");
 
 		generalpage.lblProfileName().click();
 		generalpage.getBtnLogOut().click();
 
-		generalpage = login.open().Login(REPO.DB, Account.VALID_ID, Account.VALID_PASS);
-		Assert.assertEquals(generalpage.getProfileText(), Account.VALID_ID.getValue(), "User login failed");
+		generalpage = login.open().Login(REPO.DB, Account.ID, Account.PASS);
+		Assert.assertEquals(generalpage.getProfileText(), Account.ID.getValue(), "User login failed");
 
 		// Constant.WEBDRIVER.manage().timeouts().implicitlyWait(3000,
 		// TimeUnit.MILLISECONDS);
@@ -96,12 +96,28 @@ public class TestCases extends TestBase {
 		// Step 4:Click on "Login" button
 		// Step 5: Verify Dashboard Error message "Username or password is invalid"
 		LoginPage login = new LoginPage();
-		MainPage Main = login.open().Login(REPO.SP, Account.VALID_TEST_ID, Account.VALID_TEST_PASS);
+		MainPage Main = login.open().Login(REPO.SP, Account.TEST_ID, Account.TEST_PASS);
 		Main.clickProfileName();
-		Main.Logout().Login(REPO.SP, Account.VALID_TEST_ID, Account.INVALID_TEST_PASS);
+		Main.Logout().Login(REPO.SP, Account.TEST_ID, Account.UPPER_TEST_PASS);
 		String ActualMsg = Utilities.getBrowserFormMsg();
 		Utilities.clickPopup();
 		String ExpectedMsg = "Username or password is invalid";
 		Assert.assertEquals(ActualMsg, ExpectedMsg, "The message message is not displayed as expected ");
+	}
+	
+	@Test
+	private void DA_LOGIN_TC010() {
+		System.out.println("DA_LOGIN_TC010	Verify \"Username\" is not case sensitive");
+		// Step 1:Navigate Dashboard login page
+		// Step 2:Select repository
+		// Step 3:Enter invalid username and password
+		// Step 4:Click on "Login" button
+		// Step 5: Verify Dashboard Error message "Username or password is invalid"
+		LoginPage login = new LoginPage();
+		MainPage Main = login.open().Login(REPO.SP, Account.TEST_ID, Account.TEST_PASS);
+		Assert.assertEquals(Main.getProfileText(), Account.TEST_ID.getValue(), "User login failed");
+		Main.clickProfileName();
+		Main.Logout().Login(REPO.SP, Account.UPPER_TEST_ID, Account.UPPER_TEST_PASS);
+		Assert.assertEquals(Main.getProfileText(), Account.TEST_ID.getValue(), "User login failed");
 	}
 }
