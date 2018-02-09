@@ -23,6 +23,7 @@ public class MainPage {
 	private static final By lnkAddPage = By
 			.xpath("//li[@class=\"mn-setting\"]//a[contains(@href,\"Dashboard.openAddPageForm\")]");
 	private static final By btnAddPage_OK = By.xpath("//input[@id=\"OK\"]");
+	private static final By txtPageName = By.xpath("//input[@id='name']");
 
 	public MainPage() {
 		// TODO Auto-generated constructor stub
@@ -50,6 +51,10 @@ public class MainPage {
 
 	protected WebElement get_AddPage_BtnOk() {
 		return Utilities.findElement(btnAddPage_OK, Timeout.short_time.getValue());
+	}
+	
+	protected WebElement get_AddPage_txtPageName() {
+		return Utilities.findElement(txtPageName, Timeout.short_time.getValue());
 	}
 
 	public String getProfileText() {
@@ -91,5 +96,4 @@ public class MainPage {
 			return false;
 		}
 	}
-
 }

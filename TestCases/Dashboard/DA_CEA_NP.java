@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 import Dashboard.DataObjects.Account;
 import Dashboard.DataObjects.REPO;
 
-
 /**
  * @author an.son
  *
@@ -22,10 +21,18 @@ public class DA_CEA_NP extends TestBase {
 		LoginPage login = new LoginPage();
 		MainPage mainpage = login.open().Login(REPO.SP.getValue(), Account.ID.getValue(), Account.BLANK.getValue());
 		mainpage.gotoDashboard_AddPage();
-		boolean ActualResult = mainpage.checkControlIsClickable(mainpage.lblProfileName());
-		// Assert.assertEquals(ActualResult, false, "The message does not display as
-		// expected ");
+		boolean ActualResult = mainpage.checkControlIsClickable(mainpage.getLnkSetting());
 		Assert.assertFalse(ActualResult, "Control on MainPage is not met unclickable required attribute");
+	}
+
+	@Test
+	private void DA_LOGIN_TC015() {
+		System.out.println(
+				"DA_MP_TC015_Verify user is able to add additional pages besides \"Overview\" page successfully");
+		LoginPage login = new LoginPage();
+		MainPage mainpage = login.open().Login(REPO.SP.getValue(), Account.ID.getValue(), Account.BLANK.getValue());
+		mainpage.gotoDashboard_AddPage();
+		
 	}
 
 }
