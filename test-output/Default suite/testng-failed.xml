@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test name="Default test(failed)">
     <classes>
-      <class name="Dashboard.TestCases">
+      <class name="Dashboard.DA_CEA_NP">
         <methods>
           <include name="beforeMethod"/>
-          <include name="DA_LOGIN_TC_TEST" invocation-numbers="0 1"/>
+          <include name="DA_LOGIN_TC014"/>
           <include name="afterMethod"/>
         </methods>
-      </class> <!-- Dashboard.TestCases -->
+      </class> <!-- Dashboard.DA_CEA_NP -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

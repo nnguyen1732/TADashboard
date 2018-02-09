@@ -4,10 +4,13 @@
 package Dashboard;
 
 import org.openqa.selenium.By;
-
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import constant.Constant;
 import constant.Constant.*;
 import common.Utilities;
 
@@ -52,7 +55,7 @@ public class MainPage {
 	protected WebElement get_AddPage_BtnOk() {
 		return Utilities.findElement(btnAddPage_OK, Timeout.short_time.getValue());
 	}
-	
+
 	protected WebElement get_AddPage_txtPageName() {
 		return Utilities.findElement(txtPageName, Timeout.short_time.getValue());
 	}
@@ -73,13 +76,13 @@ public class MainPage {
 		return new LoginPage();
 	}
 
-	public void click_lnkSetting() {
+	public void clicklnkSetting() {
 		getLnkSetting().click();
 		Utilities.waitElement(lnkAddPage);
 	}
 
-	public void gotoDashboard_AddPage() {
-		click_lnkSetting();
+	public void gotoDashboardAddPage() {
+		clicklnkSetting();
 		getLnkAddPage().click();
 		Utilities.waitElement(btnAddPage_OK);
 	}
@@ -88,7 +91,7 @@ public class MainPage {
 		element.click();
 	}
 
-	public boolean checkControlIsClickable(WebElement element) {
+	public boolean isControlIsClickable(WebElement element) {
 		try {
 			clickElement(element);
 			return true;
