@@ -23,6 +23,8 @@ public class MainPage {
 			.xpath("//li[@class=\"mn-setting\"]//a[contains(@href,\"Dashboard.openAddPageForm\")]");
 	private static final By btnAddPage_OK = By.xpath("//input[@id=\"OK\"]");
 	private static final By txtPageName = By.xpath("//input[@id='name']");
+	private static final By btnAddPageCancel = By.xpath(".//input[@id='Cancel']");
+	private static final String tagNextPage = "";
 
 	public MainPage() {
 		// TODO Auto-generated constructor stub
@@ -54,6 +56,10 @@ public class MainPage {
 
 	protected WebElement get_AddPage_txtPageName() {
 		return Utilities.findElement(txtPageName, Timeout.short_time.getValue());
+	}
+	
+	private WebElement getAddPageBtnCancel() {
+		return Utilities.findElement(btnAddPageCancel, Timeout.short_time.getValue());
 	}
 
 	public String getProfileText() {
@@ -87,6 +93,9 @@ public class MainPage {
 		element.click();
 	}
 
+	public void setTextToElement(WebElement element) {
+		
+	}
 	public boolean isControlIsClickable(WebElement element) {
 		try {
 			clickElement(element);
@@ -94,5 +103,8 @@ public class MainPage {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+	public void clickAddPageCancel() {
+		clickElement(this.getAddPageBtnCancel());
 	}
 }
