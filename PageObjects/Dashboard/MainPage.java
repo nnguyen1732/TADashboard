@@ -128,13 +128,19 @@ public class MainPage {
 	
 	private String getName(String locator, int index) {
 		if(this.getElementText(elementLocator(String.format(locator, index))).equals("Overview")) {
-			return this.getElementText(elementLocator(String.format(locator, index+1)));
+			try {
+				String pageName = this.getElementText(elementLocator(String.format(locator, index+1)));
+				return pageName;
+			} catch (Exception e) {
+				return String.format("Can not find the next element with [index = %d]", index+1);
+			}
+			
 		}else {
 			return String.format("Can not find the next element with [index = %d]", index+1);
 		}
 	}
 	
 	public String  getNextTagName() {
-		return getName(tagMainPageLocator, 1);
+		return getName(tagMainPageLocator, 200);
 	}
 }
