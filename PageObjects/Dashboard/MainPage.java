@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import constant.Constant;
 import constant.Constant.*;
 import common.Utilities;
 
@@ -25,6 +26,7 @@ public class MainPage {
 	private static final By txtPageName = By.xpath("//input[@id='name']");
 	private static final By btnAddPageCancel = By.xpath(".//input[@id='Cancel']");
 	private static final String tagMainPageLocator = "//div[@id='main-menu']//li[%d]/a";
+	private static final By lnkDeletePage = By.xpath("//li[@class='mn-setting']//a[@class='delete']");
 
 	public MainPage() {
 		// TODO Auto-generated constructor stub
@@ -36,6 +38,10 @@ public class MainPage {
 	// element
 	protected WebElement lblProfileName() {
 		return Utilities.findElement(ProfileName, Timeout.short_time.getValue());
+	}
+	
+	protected WebElement getlnkDeletePage() {
+		return Utilities.findElement(lnkDeletePage, Timeout.short_time.getValue());
 	}
 
 	private WebElement elementLocator(String locator) {
@@ -130,6 +136,7 @@ public class MainPage {
 		if(this.getElementText(elementLocator(String.format(locator, index))).equals("Overview")) {
 			try {
 				String pageName = this.getElementText(elementLocator(String.format(locator, index+1)));
+				this.deletePage(elementLocator(String.format(locator, index+1)));
 				return pageName;
 			} catch (Exception e) {
 				return String.format("Can not find the next element with [index = %d]", index+1);
@@ -138,9 +145,19 @@ public class MainPage {
 		}else {
 			return String.format("Can not find the next element with [index = %d]", index+1);
 		}
+		
 	}
 	
 	public String  getNextTagName() {
 		return getName(tagMainPageLocator, 1);
 	}
+	
+	public void deletePage(WebElement element) {
+		clickElement(element);
+		clickElement(getLnkSetting());
+		clickElement(getlnkDeletePage());
+		Constant.WEBDRIVER.switchTo().alert().accept();
+	}
+	
+	
 }
