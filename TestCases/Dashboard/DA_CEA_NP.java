@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import Dashboard.DataObjects.Account;
 import Dashboard.DataObjects.REPO;
+import common.Utilities;
 
 /**
  * @author an.son
@@ -29,10 +30,14 @@ public class DA_CEA_NP extends TestBase {
 	private void DA_LOGIN_TC015() {
 		System.out.println(
 				"DA_MP_TC015_Verify user is able to add additional pages besides \"Overview\" page successfully");
+		String pageName= Utilities.generateUniqueString("Pg_");
 		LoginPage login = new LoginPage();
 		MainPage mainpage = login.open().Login(REPO.SP.getValue(), Account.ID.getValue(), Account.BLANK.getValue());
 		mainpage.gotoDashboardAddPage();
-		
+		mainpage.setTextToAddPageTxtPageName(pageName);
+		mainpage.clickAddPageBtn();	
+		String actualNextName = mainpage.getNextTagName();
+		Assert.assertEquals(actualNextName, pageName, "The new page is not exactly created next to the right of \"Overview\" tag");
 	}
 
 }

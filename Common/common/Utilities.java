@@ -73,4 +73,12 @@ public class Utilities {
 	public static void clickPopup() {
 		Constant.WEBDRIVER.switchTo().alert().accept();
 	}
+	
+	public static String generateUniqueString(String entity) {
+		return entity + new String().hashCode();
+	}
+	
+	public static String UniqueObjectID(String entity) {
+		return generateUniqueString(entity).substring(0, 12);
+	}
 }

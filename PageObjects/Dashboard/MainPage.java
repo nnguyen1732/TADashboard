@@ -24,7 +24,7 @@ public class MainPage {
 	private static final By btnAddPage_OK = By.xpath("//input[@id=\"OK\"]");
 	private static final By txtPageName = By.xpath("//input[@id='name']");
 	private static final By btnAddPageCancel = By.xpath(".//input[@id='Cancel']");
-	private static final String tagNextPage = "";
+	private static final String tagMainPageLocator = "//div[@id='menu-content'//li[%d]/a";
 
 	public MainPage() {
 		// TODO Auto-generated constructor stub
@@ -38,6 +38,9 @@ public class MainPage {
 		return Utilities.findElement(ProfileName, Timeout.short_time.getValue());
 	}
 
+	private WebElement elementLocator(String locator) {
+		return Utilities.findElement(By.xpath(locator), Timeout.short_time.getValue());
+	}
 	protected WebElement getBtnLogOut() {
 		return Utilities.findElement(btnLogOut, Timeout.short_time.getValue());
 	}
@@ -54,10 +57,10 @@ public class MainPage {
 		return Utilities.findElement(btnAddPage_OK, Timeout.short_time.getValue());
 	}
 
-	protected WebElement get_AddPage_txtPageName() {
+	protected WebElement getAddPagetxtPageName() {
 		return Utilities.findElement(txtPageName, Timeout.short_time.getValue());
 	}
-	
+
 	private WebElement getAddPageBtnCancel() {
 		return Utilities.findElement(btnAddPageCancel, Timeout.short_time.getValue());
 	}
@@ -93,9 +96,14 @@ public class MainPage {
 		element.click();
 	}
 
-	public void setTextToElement(WebElement element) {
-		
+	public void setTextToElement(WebElement element, String content) {
+		element.sendKeys(content);
 	}
+
+	public void setTextToAddPageTxtPageName(String content) {
+		setTextToElement(getAddPagetxtPageName(), content);
+	}
+
 	public boolean isControlIsClickable(WebElement element) {
 		try {
 			clickElement(element);
@@ -104,7 +112,28 @@ public class MainPage {
 			return false;
 		}
 	}
+
 	public void clickAddPageCancel() {
 		clickElement(this.getAddPageBtnCancel());
+	}
+
+	public void clickAddPageBtn() {
+		this.get_AddPage_BtnOk().click();
+	}
+	
+	private String getElementText(WebElement element) {
+		return element.getText();
+	}
+	
+	private String getName(String locator, int index) {
+		if(this.getElementText(elementLocator(String.format(locator, index))) == "Overview" ) {
+			return this.getElementText(elementLocator(String.format(locator, index+1)));
+		}else {
+			return String.format("Can not find the next element with [index = %d]", index+1);
+		}
+	}
+	
+	public String  getNextTagName() {
+		return getName(tagMainPageLocator, 0);
 	}
 }
