@@ -141,5 +141,6 @@ public class MainPage {
 	}
 	
 	public String  getNextTagName() {
+		return getName(tagMainPageLocator, 1);
 	}
 }
