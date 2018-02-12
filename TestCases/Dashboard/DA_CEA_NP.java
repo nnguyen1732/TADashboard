@@ -16,9 +16,9 @@ import common.Utilities;
 public class DA_CEA_NP extends TestBase {
 
 	@Test
-	private void DA_LOGIN_TC014() {
+	private void DAMPTC014() {
 		System.out.println(
-				"DA_LOGIN_TC014	Verify when \"New Page\" control/form is brought up to focus all other control within Dashboard page are locked and disabled");
+				"DA_MP_TC014_Verify when \"New Page\" control/form is brought up to focus all other control within Dashboard page are locked and disabled");
 		LoginPage login = new LoginPage();
 		MainPage mainpage = login.open().Login(REPO.SP.getValue(), Account.ID.getValue(), Account.BLANK.getValue());
 		mainpage.gotoDashboardAddPage();
@@ -27,7 +27,7 @@ public class DA_CEA_NP extends TestBase {
 	}
 
 	@Test
-	private void DA_MP_TC015() {
+	private void DAMPTC015() {
 		System.out.println(
 				"DA_MP_TC015_Verify user is able to add additional pages besides \"Overview\" page successfully");
 		String pageName= Utilities.UniqueObjectString("Pg_", 6);
