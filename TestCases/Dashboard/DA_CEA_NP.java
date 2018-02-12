@@ -40,4 +40,17 @@ public class DA_CEA_NP extends TestBase {
 		Assert.assertEquals(actualNextName, pageName, "The new page is not exactly created next to the right of \"Overview\" tag");
 	}
 
+	@Test
+	private void DAMPTC016() {
+		System.out.println(
+				"DA_MP_TC016_Verify the newly added main parent page is positioned at the location specified as set with \"Displayed After\" field of \"New Page\" form on the main page bar/\"Parent Page\" dropped down menu");
+		String pageName= Utilities.UniqueObjectString("Pg_", 6);
+		LoginPage login = new LoginPage();
+		MainPage mainpage = login.open().Login(REPO.SP.getValue(), Account.ID.getValue(), Account.BLANK.getValue());
+		mainpage.gotoDashboardAddPage();
+		mainpage.setTextToAddPageTxtPageName(pageName);
+		mainpage.clickAddPageBtn();	
+		String actualNextName = mainpage.getNextTagName();
+		Assert.assertEquals(actualNextName, pageName, "The new page is not exactly created next to the right of \"Overview\" tag");
+	}
 }
