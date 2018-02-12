@@ -3,6 +3,7 @@
  */
 package common;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -12,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import constant.Constant;
 import constant.Constant.*;
+import net.bytebuddy.utility.RandomString;
 
 /**
  * @author an.son
@@ -73,12 +75,25 @@ public class Utilities {
 	public static void clickPopup() {
 		Constant.WEBDRIVER.switchTo().alert().accept();
 	}
-	
-	public static String generateUniqueString(String entity) {
-		return entity + new String().hashCode();
+
+	public static String randomString() {
+		String Random = RandomString.make(9);
+		return Random;
 	}
-	
-	public static String UniqueObjectID(String entity) {
-		return generateUniqueString(entity).substring(0, 12);
+
+	public static String randomString(int number) {
+		String Random = RandomString.make(number);
+		return Random;
 	}
+
+	public static String randomID(int number) {
+		int randomNumber = new Random().nextInt();
+		String PID = Integer.toString(randomNumber);
+		return PID;
+	}
+
+	public static String UniqueObjectString(String entity, int number) {
+		return new String(entity.concat(randomID(number).substring(1)));
+	}
+
 }

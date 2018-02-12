@@ -24,7 +24,7 @@ public class MainPage {
 	private static final By btnAddPage_OK = By.xpath("//input[@id=\"OK\"]");
 	private static final By txtPageName = By.xpath("//input[@id='name']");
 	private static final By btnAddPageCancel = By.xpath(".//input[@id='Cancel']");
-	private static final String tagMainPageLocator = "//div[@id='menu-content'//li[%d]/a";
+	private static final String tagMainPageLocator = "//div[@id='main-menu']//li[%d]/a";
 
 	public MainPage() {
 		// TODO Auto-generated constructor stub
@@ -119,6 +119,7 @@ public class MainPage {
 
 	public void clickAddPageBtn() {
 		this.get_AddPage_BtnOk().click();
+		Utilities.waitElementNotExit(btnAddPage_OK);
 	}
 	
 	private String getElementText(WebElement element) {
@@ -126,7 +127,7 @@ public class MainPage {
 	}
 	
 	private String getName(String locator, int index) {
-		if(this.getElementText(elementLocator(String.format(locator, index))) == "Overview" ) {
+		if(this.getElementText(elementLocator(String.format(locator, index))).equals("Overview")) {
 			return this.getElementText(elementLocator(String.format(locator, index+1)));
 		}else {
 			return String.format("Can not find the next element with [index = %d]", index+1);
@@ -134,6 +135,6 @@ public class MainPage {
 	}
 	
 	public String  getNextTagName() {
-		return getName(tagMainPageLocator, 0);
+		return getName(tagMainPageLocator, 1);
 	}
 }

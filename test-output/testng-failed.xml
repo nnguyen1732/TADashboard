@@ -5,8 +5,8 @@
     <classes>
       <class name="Dashboard.DA_CEA_NP">
         <methods>
+          <include name="DA_LOGIN_TC015"/>
           <include name="beforeMethod"/>
-          <include name="DA_LOGIN_TC014"/>
           <include name="afterMethod"/>
         </methods>
       </class> <!-- Dashboard.DA_CEA_NP -->
