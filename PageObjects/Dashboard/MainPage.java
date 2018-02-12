@@ -148,8 +148,8 @@ public class MainPage {
 		
 	}
 	
-	public String  getNextTagName() {
-		return getName(tagMainPageLocator, 1);
+	public String  getNextTagName(int index) {
+		return getName(tagMainPageLocator, index);
 	}
 	
 	public void deletePage(WebElement element) {
