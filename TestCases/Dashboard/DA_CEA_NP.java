@@ -27,7 +27,7 @@ public class DA_CEA_NP extends TestBase {
 	}
 
 	@Test
-	private void DA_LOGIN_TC015() {
+	private void DA_MP_TC015() {
 		System.out.println(
 				"DA_MP_TC015_Verify user is able to add additional pages besides \"Overview\" page successfully");
 		String pageName= Utilities.UniqueObjectString("Pg_", 6);
