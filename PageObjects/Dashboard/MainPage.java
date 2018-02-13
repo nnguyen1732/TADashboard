@@ -6,6 +6,8 @@ package Dashboard;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
 
 import constant.Constant;
 import constant.Constant.*;
@@ -25,7 +27,7 @@ public class MainPage {
 	private static final By btnAddPage_OK = By.xpath("//input[@id=\"OK\"]");
 	private static final By txtPageName = By.xpath("//input[@id='name']");
 	private static final By btnAddPageCancel = By.xpath(".//input[@id='Cancel']");
-	private static final String tagMainPageLocator = "//div[@id='main-menu']//li[%d]/a";
+	private static final String tagMainPageLocator = "//div[@id='main-menu']/div[@class='container']/ul/li[%d]/a";
 	private static final By lnkDeletePage = By.xpath("//li[@class='mn-setting']//a[@class='delete']");
 
 	public MainPage() {
@@ -39,7 +41,7 @@ public class MainPage {
 	protected WebElement lblProfileName() {
 		return Utilities.findElement(ProfileName, Timeout.short_time.getValue());
 	}
-	
+
 	protected WebElement getlnkDeletePage() {
 		return Utilities.findElement(lnkDeletePage, Timeout.short_time.getValue());
 	}
@@ -47,6 +49,7 @@ public class MainPage {
 	private WebElement elementLocator(String locator) {
 		return Utilities.findElement(By.xpath(locator), Timeout.short_time.getValue());
 	}
+
 	protected WebElement getBtnLogOut() {
 		return Utilities.findElement(btnLogOut, Timeout.short_time.getValue());
 	}
@@ -127,37 +130,62 @@ public class MainPage {
 		this.get_AddPage_BtnOk().click();
 		Utilities.waitElementNotExit(btnAddPage_OK);
 	}
-	
+
 	private String getElementText(WebElement element) {
 		return element.getText();
 	}
-	
+
 	private String getName(String locator, int index) {
-		if(this.getElementText(elementLocator(String.format(locator, index))).equals("Overview")) {
+		if (this.getElementText(elementLocator(String.format(locator, index - 1))) != "") {
 			try {
-				String pageName = this.getElementText(elementLocator(String.format(locator, index+1)));
-				this.deletePage(elementLocator(String.format(locator, index+1)));
+				String pageName = this.getElementText(elementLocator(String.format(locator, index)));
 				return pageName;
 			} catch (Exception e) {
-				return String.format("Can not find the next element with [index = %d]", index+1);
+				return String.format("Can not find the next element with [index = %d]", index);
 			}
-			
-		}else {
-			return String.format("Can not find the next element with [index = %d]", index+1);
+		} else {
+			return String.format("Can not find the next element with [index = %d]", index);
 		}
-		
+
 	}
-	
-	public String  getNextTagName(int index) {
-		return getName(tagMainPageLocator, index);
+
+	public String getNextTagNameByIndex(int pageIndex) {
+		return getName(tagMainPageLocator, pageIndex);
 	}
-	
-	public void deletePage(WebElement element) {
+
+	private Integer getIndexByNameAndStringXpath(String name, String xpath) {
+		int index = Constant.WEBDRIVER.findElements(By.xpath(xpath.replace("[%d]", ""))).size();
+		String tmp = "";
+		for (; index >= 0; index -= 1) {
+			tmp = Constant.WEBDRIVER.findElement(By.xpath(String.format(xpath, index))).getText().trim();
+			if (name.trim().equals(tmp)) {
+				break;
+			}
+		}
+		return index;
+	}
+
+	public Integer getTagIndexByName(String name) {
+		return getIndexByNameAndStringXpath(name, tagMainPageLocator);
+	}
+
+	/*
+	 * private Integer IndexOnLeft(int index) { return index - 1; }
+	 */
+
+	private void deletePage(WebElement element) {
 		clickElement(element);
 		clickElement(getLnkSetting());
 		clickElement(getlnkDeletePage());
 		Constant.WEBDRIVER.switchTo().alert().accept();
+		new WebDriverWait(Constant.WEBDRIVER, Timeout.short_time.getValue()).until(ExpectedConditions.invisibilityOf(element));
 	}
-	
-	
+
+	public void deleteMultiPage(int index) {
+		while (index > 1) {
+			System.out.println(index);
+			this.deletePage(elementLocator(String.format(tagMainPageLocator, index)));			
+			index -- ;
+		}
+	}
 }

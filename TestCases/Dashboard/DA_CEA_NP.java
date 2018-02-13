@@ -35,57 +35,47 @@ public class DA_CEA_NP extends TestBase {
 		MainPage mainpage = login.open().Login(REPO.SP.getValue(), Account.ID.getValue(), Account.BLANK.getValue());
 		mainpage.gotoDashboardAddPage();
 		mainpage.setTextToAddPageTxtPageName(pageName);
-<<<<<<< HEAD
-		mainpage.clickAddPageBtn();
-		String actualNextName = mainpage.getNextTagName();
-		Assert.assertEquals(actualNextName, pageName,
-				"The new page is not exactly created next to the right of \"Overview\" tag");
-=======
 		mainpage.clickAddPageBtn();	
-		String actualNextName = mainpage.getNextTagName(1);
+		String actualNextName = mainpage.getNextTagNameByIndex(2);
 		Assert.assertEquals(actualNextName, pageName, "The new page is not exactly created next to the right of \"Overview\" tag");
->>>>>>> 92b5caa12062f4793c77c87cde3971a570ecc886
+
 	}
 // UNCOMPLETE----------------------------------------------------------------------------------------
 	@Test
 	private void DAMPTC016() {
 		System.out.println(
 				"DA_MP_TC016_Verify the newly added main parent page is positioned at the location specified as set with \"Displayed After\" field of \"New Page\" form on the main page bar/\"Parent Page\" dropped down menu");
-		String pageName = Utilities.UniqueObjectString("Pg_", 6);
+		String pageName1 = Utilities.UniqueObjectString("Pg_", 6);
 		LoginPage login = new LoginPage();
 		MainPage mainpage = login.open().Login(REPO.SP.getValue(), Account.ID.getValue(), Account.BLANK.getValue());
 		mainpage.gotoDashboardAddPage();
-		mainpage.setTextToAddPageTxtPageName(pageName);
-<<<<<<< HEAD
+		mainpage.setTextToAddPageTxtPageName(pageName1);
 		mainpage.clickAddPageBtn();
-		String actualNextName = mainpage.getNextTagName();
-		Assert.assertEquals(actualNextName, pageName,
-				"The new page is not exactly created next to the right of \"Overview\" tag");
-=======
-		mainpage.clickAddPageBtn();	
-		pageName= Utilities.UniqueObjectString("Pg_", 6);
+		String pageName2= Utilities.UniqueObjectString("Pg_", 6);
 		mainpage.gotoDashboardAddPage();
-		mainpage.setTextToAddPageTxtPageName(pageName);
+		mainpage.setTextToAddPageTxtPageName(pageName2);
 		mainpage.clickAddPageBtn();	
-		String actualNextName = mainpage.getNextTagName(2);
-		Assert.assertEquals(actualNextName, pageName, "The new page is not exactly created next to the right of \"Overview\" tag");
+		String actualNextName = mainpage.getNextTagNameByIndex(2);
+		String expectedName = mainpage.getNextTagNameByIndex(mainpage.getTagIndexByName(pageName1)-1);
+		mainpage.deleteMultiPage(3);
+		Assert.assertEquals(actualNextName, expectedName, "The new page is not exactly created next to the right of \"Overview\" tag");
 	}
 	
 	@Test
 	private void DAMPTC017() {
 		System.out.println(
 				"DA_MP_TC016_Verify the newly added main parent page is positioned at the location specified as set with \"Displayed After\" field of \"New Page\" form on the main page bar/\"Parent Page\" dropped down menu");
-		String pageName= Utilities.UniqueObjectString("Pg_", 6);
+		String pageName= Utilities.UniqueObjectString("Pg_", 9);
 		LoginPage login = new LoginPage();
 		MainPage mainpage = login.open().Login(REPO.SP.getValue(), Account.ID.getValue(), Account.BLANK.getValue());
 		mainpage.gotoDashboardAddPage();
 		mainpage.setTextToAddPageTxtPageName(pageName);
 		mainpage.clickAddPageBtn();	
-		pageName= Utilities.UniqueObjectString("Pg_", 6);
+		pageName= Utilities.UniqueObjectString("Pg_", 9);
 		mainpage.gotoDashboardAddPage();
 		mainpage.setTextToAddPageTxtPageName(pageName);
 		mainpage.clickAddPageBtn();	
-		String actualNextName = mainpage.getNextTagName(2);
+		String actualNextName = mainpage.getNextTagNameByIndex(2);
 		Assert.assertEquals(actualNextName, pageName, "The new page is not exactly created next to the right of \"Overview\" tag");
 	}
 	
@@ -103,8 +93,7 @@ public class DA_CEA_NP extends TestBase {
 		mainpage.gotoDashboardAddPage();
 		mainpage.setTextToAddPageTxtPageName(pageName);
 		mainpage.clickAddPageBtn();	
-		String actualNextName = mainpage.getNextTagName(2);
-		Assert.assertEquals(actualNextName, pageName, "The new page is not exactly created next to the right of \"Overview\" tag");
->>>>>>> 92b5caa12062f4793c77c87cde3971a570ecc886
+		//String actualNextName = mainpage.getNextTagName(2);
+		//Assert.assertEquals(actualNextName, pageName, "The new page is not exactly created next to the right of \"Overview\" tag");
 	}
 }

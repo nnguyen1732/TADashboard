@@ -46,7 +46,7 @@ public class Utilities {
 	}
 
 	public static void waitElementNotExit(By element) {
-		new WebDriverWait(Constant.WEBDRIVER, Timeout.short_time.getValue())
+		new WebDriverWait(Constant.WEBDRIVER, Timeout.long_time.getValue())
 				.until(ExpectedConditions.invisibilityOfElementLocated(element));
 	}
 
