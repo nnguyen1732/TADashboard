@@ -68,18 +68,19 @@ public class DA_CEA_NP extends TestBase {
 	private void DAMPTC017() {
 		System.out.println(
 				"DA_MP_TC016_Verify the newly added main parent page is positioned at the location specified as set with \"Displayed After\" field of \"New Page\" form on the main page bar/\"Parent Page\" dropped down menu");
-		String pageName= Utilities.UniqueObjectString("Pg_", 9);
+		String pageName = Utilities.UniqueObjectString("Pg_", 6);
 		LoginPage login = new LoginPage();
 		MainPage mainpage = login.open().Login(REPO.SP.getValue(), Account.ID.getValue(), Account.BLANK.getValue());
 		mainpage.gotoDashboardAddPage();
 		mainpage.setTextToAddPageTxtPageName(pageName);
-		mainpage.clickAddPageBtn();	
-		pageName= Utilities.UniqueObjectString("Pg_", 9);
-		mainpage.gotoDashboardAddPage();
-		mainpage.setTextToAddPageTxtPageName(pageName);
-		mainpage.clickAddPageBtn();	
-		String actualNextName = mainpage.getNextTagNameByIndex(2);
-		Assert.assertEquals(actualNextName, pageName, "The new page is not exactly created next to the right of \"Overview\" tag");
+		mainpage.clickAddPageBtn();
+		login = mainpage.Logout();
+		mainpage = login.open().Login(REPO.SP.getValue(), Account.ID_TEST.getValue(), Account.BLANK.getValue());
+		boolean pagepresent = mainpage.isNewPagePresent(pageName);
+		login = mainpage.Logout();
+		mainpage = login.Login(REPO.SP.getValue(), Account.ID.getValue(), Account.BLANK.getValue());
+		mainpage.deleteMultiPage(2);
+		Assert.assertTrue(pagepresent, "The new page does not display with other username with different account type");
 	}
 	
 	@Test

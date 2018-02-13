@@ -52,9 +52,12 @@ public class Utilities {
 
 	// check element exist or not
 	public static boolean checkElementExist(By element) {
-		if (Constant.WEBDRIVER.findElement(element).isDisplayed()) {
-			return true;
-		} else {
+		try {
+			if (Utilities.findElement(element, Timeout.short_time.getValue()).isDisplayed())
+				return true;
+			else
+				return false;
+		} catch (Exception e) {
 			return false;
 		}
 	}

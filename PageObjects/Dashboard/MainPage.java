@@ -20,7 +20,7 @@ import common.Utilities;
  */
 public class MainPage {
 	// locator
-	private static final By ProfileName = By.xpath("//a[@href=\"#Welcome\"]");
+	private static final By ProfileName = By.xpath("//a[@href='#Welcome']");
 	private static final By btnLogOut = By.xpath("//a[@href=\"logout.do\"]");
 	private static final By lnkSetting = By.xpath("//li[@class=\"mn-setting\"]/a[@href=\"javascript:void(0);\"]");
 	private static final By lnkAddPage = By
@@ -31,6 +31,7 @@ public class MainPage {
 	private static final String tagMainPageLocator = "//div[@id='main-menu']/div[@class='container']/ul/li[%d]/a";
 	private static final By lnkDeletePage = By.xpath("//li[@class='mn-setting']//a[@class='delete']");
 	private static final By cbbDisplayAfter = By.xpath("//div[@class='pbox']//tr/td/select[@id='afterpage']");
+	private static final String tagPageLocator = "//div[@id='main-menu']/div[@class='container']//a[text()='%s']";
 
 	public MainPage() {
 		// TODO Auto-generated constructor stub
@@ -206,5 +207,9 @@ public class MainPage {
 	
 	public void selectCbbOption(String page) {
 		getCbbDisplayAfter().selectByIndex(this.getIndexInCbbList(page));
+	}
+	
+	public boolean isNewPagePresent(String name) {
+		return Utilities.checkElementExist(By.xpath(String.format(tagPageLocator,name )));
 	}
 }
