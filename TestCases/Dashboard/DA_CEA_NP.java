@@ -56,9 +56,10 @@ public class DA_CEA_NP extends TestBase {
 		String pageName2= Utilities.UniqueObjectString("Pg_", 6);
 		mainpage.gotoDashboardAddPage();
 		mainpage.setTextToAddPageTxtPageName(pageName2);
+		mainpage.selectCbbOption(pageName1);
 		mainpage.clickAddPageBtn();	
-		String actualNextName = mainpage.getNextTagNameByIndex(2);
-		String expectedName = mainpage.getNextTagNameByIndex(mainpage.getTagIndexByName(pageName1)-1);
+		String actualNextName = mainpage.getNextTagNameByIndex(3);
+		String expectedName = mainpage.getNextTagNameByIndex(mainpage.getTagIndexByName(pageName1)+1);
 		mainpage.deleteMultiPage(3);
 		Assert.assertEquals(actualNextName, expectedName, "The new page is not exactly created next to the right of \"Overview\" tag");
 	}

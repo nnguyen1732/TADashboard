@@ -6,6 +6,7 @@ package Dashboard;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 
@@ -29,6 +30,7 @@ public class MainPage {
 	private static final By btnAddPageCancel = By.xpath(".//input[@id='Cancel']");
 	private static final String tagMainPageLocator = "//div[@id='main-menu']/div[@class='container']/ul/li[%d]/a";
 	private static final By lnkDeletePage = By.xpath("//li[@class='mn-setting']//a[@class='delete']");
+	private static final By cbbDisplayAfter = By.xpath("//div[@class='pbox']//tr/td/select[@id='afterpage']");
 
 	public MainPage() {
 		// TODO Auto-generated constructor stub
@@ -72,6 +74,10 @@ public class MainPage {
 
 	private WebElement getAddPageBtnCancel() {
 		return Utilities.findElement(btnAddPageCancel, Timeout.short_time.getValue());
+	}
+	
+	protected Select getCbbDisplayAfter() {
+		return new Select(Utilities.findElement(cbbDisplayAfter, Timeout.short_time.getValue()));
 	}
 
 	public String getProfileText() {
@@ -174,18 +180,31 @@ public class MainPage {
 	 */
 
 	private void deletePage(WebElement element) {
+		WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, Timeout.long_time.getValue());
 		clickElement(element);
 		clickElement(getLnkSetting());
-		clickElement(getlnkDeletePage());
+		clickElement(getlnkDeletePage());		
+		wait.until(ExpectedConditions.alertIsPresent());
 		Constant.WEBDRIVER.switchTo().alert().accept();
-		new WebDriverWait(Constant.WEBDRIVER, Timeout.short_time.getValue()).until(ExpectedConditions.invisibilityOf(element));
+		wait.until(ExpectedConditions.invisibilityOf(element));
 	}
 
+	private Integer getIndexInCbbList(String page) {
+		int i = 0;
+		
+		while(!getCbbDisplayAfter().getOptions().get(i).getText().equals(page)) {
+			i += 1;
+		}
+		return i;
+	}
 	public void deleteMultiPage(int index) {
 		while (index > 1) {
-			System.out.println(index);
 			this.deletePage(elementLocator(String.format(tagMainPageLocator, index)));			
 			index -- ;
 		}
+	}
+	
+	public void selectCbbOption(String page) {
+		getCbbDisplayAfter().selectByIndex(this.getIndexInCbbList(page));
 	}
 }

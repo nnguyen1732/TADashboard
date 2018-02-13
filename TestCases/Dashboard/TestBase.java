@@ -18,7 +18,7 @@ public class TestBase {
 		System.out.println("Run beforeMethod");
 		System.setProperty("webdriver.chrome.driver", Utilities.getProjectPath() + "\\Executables\\chromedriver.exe");
 		Constant.WEBDRIVER = new ChromeDriver();
-		Constant.WEBDRIVER.manage().timeouts().pageLoadTimeout(Timeout.short_time.getValue(), TimeUnit.SECONDS);
+		Constant.WEBDRIVER.manage().timeouts().pageLoadTimeout(Timeout.wait_time.getValue(), TimeUnit.SECONDS);
 		Constant.WEBDRIVER.manage().window().maximize();
 	}
 
@@ -27,6 +27,5 @@ public class TestBase {
 		System.out.println("Run AfterMethod");
 		Constant.WEBDRIVER.quit();
 	}
-	
 
 }
