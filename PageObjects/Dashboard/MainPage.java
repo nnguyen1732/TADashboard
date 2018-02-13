@@ -5,10 +5,11 @@ package Dashboard;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterClass;
+import org.testng.Assert;
 
 import constant.Constant;
 import constant.Constant.*;
@@ -32,6 +33,9 @@ public class MainPage {
 	private static final By lnkDeletePage = By.xpath("//li[@class='mn-setting']//a[@class='delete']");
 	private static final By cbbDisplayAfter = By.xpath("//div[@class='pbox']//tr/td/select[@id='afterpage']");
 	private static final String tagPageLocator = "//div[@id='main-menu']/div[@class='container']//a[text()='%s']";
+	private static final By cbbParent = By.xpath("//select[@id='parent']");
+	private static final By cbbColumnNumber = By.xpath("//select[@id='columnnumber']");
+	private static final By chkPublic = By.xpath("//input[@id='ispublic']");
 
 	public MainPage() {
 		// TODO Auto-generated constructor stub
@@ -76,9 +80,21 @@ public class MainPage {
 	private WebElement getAddPageBtnCancel() {
 		return Utilities.findElement(btnAddPageCancel, Timeout.short_time.getValue());
 	}
-	
+
 	protected Select getCbbDisplayAfter() {
 		return new Select(Utilities.findElement(cbbDisplayAfter, Timeout.short_time.getValue()));
+	}
+
+	protected Select getCbbColumn() {
+		return new Select(Utilities.findElement(cbbColumnNumber, Timeout.short_time.getValue()));
+	}
+
+	private Select getCbbParent() {
+		return new Select(Utilities.findElement(cbbParent, Timeout.short_time.getValue()));
+	}
+
+	private WebElement getChkPhublic() {
+		return Utilities.findElement(chkPublic, Timeout.short_time.getValue());
 	}
 
 	public String getProfileText() {
@@ -184,7 +200,7 @@ public class MainPage {
 		WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, Timeout.long_time.getValue());
 		clickElement(element);
 		clickElement(getLnkSetting());
-		clickElement(getlnkDeletePage());		
+		clickElement(getlnkDeletePage());
 		wait.until(ExpectedConditions.alertIsPresent());
 		Constant.WEBDRIVER.switchTo().alert().accept();
 		wait.until(ExpectedConditions.invisibilityOf(element));
@@ -192,24 +208,87 @@ public class MainPage {
 
 	private Integer getIndexInCbbList(String page) {
 		int i = 0;
-		
-		while(!getCbbDisplayAfter().getOptions().get(i).getText().equals(page)) {
+
+		while (!getCbbDisplayAfter().getOptions().get(i).getText().equals(page)) {
 			i += 1;
 		}
 		return i;
 	}
+
 	public void deleteMultiPage(int index) {
 		while (index > 1) {
-			this.deletePage(elementLocator(String.format(tagMainPageLocator, index)));			
-			index -- ;
+			this.deletePage(elementLocator(String.format(tagMainPageLocator, index)));
+			index--;
 		}
 	}
-	
+
 	public void selectCbbOption(String page) {
 		getCbbDisplayAfter().selectByIndex(this.getIndexInCbbList(page));
 	}
-	
+
 	public boolean isNewPagePresent(String name) {
-		return Utilities.checkElementExist(By.xpath(String.format(tagPageLocator,name )));
+		return Utilities.checkElementExist(By.xpath(String.format(tagPageLocator, name)));
+	}
+
+	public void addPage(String name, String parent, String column, String after, String state) {
+		if (name == "" || Utilities.isNumber(column))
+			Assert.fail("Invalid data input");
+		else {
+			setTextToAddPageTxtPageName(name);
+			if (parent != "") {
+				System.out.println("22222222222222222222222222");
+				getCbbParent().selectByVisibleText(parent);
+			}
+			if (!column.equals("")) {
+				if (Integer.parseInt(column) > 0)
+					try {
+						System.out.println("11111111111111111111111");
+						getCbbColumn().selectByValue(column);
+					} catch (Exception e) {
+						Assert.fail("Invalid data input");
+					}
+			}
+			if (after != "") {
+				try {
+					getCbbDisplayAfter().selectByValue(after);
+				} catch (Exception e) {
+					Assert.fail("Invalid data input");
+				}
+			}
+			if (state != "" && (state == "on" || state == "off")) {
+				if (state == "on" && !getChkPhublic().isSelected()) {
+					getChkPhublic().click();
+				}
+				if (state == "off" && getChkPhublic().isSelected()) {
+					getChkPhublic().click();
+				}
+			} else {
+				Assert.fail("Invalid data input");
+			}
+		}
+		// clickElement(get_AddPage_BtnOk());
+		// Utilities.waitElement(By.xpath(String.format(tagPageLocator, name)));
+	}
+
+	private void hoverOnElement(WebElement element) {
+		Actions action = new Actions(Constant.WEBDRIVER);
+		action.moveToElement(element);
+	}
+
+	public void moveToElementTag(String element) {
+		hoverOnElement(
+				Utilities.findElement(By.xpath(String.format(tagPageLocator, element)), Timeout.short_time.getValue()));
+	}
+
+	public void movetoChildElement(String parent, String child) {
+		try {
+			moveToElementTag(parent);
+			moveToElementTag(child);
+			clickElement(Utilities.findElement(By.xpath(String.format(tagPageLocator, child)),
+					Timeout.short_time.getValue()));
+		} catch (Exception e) {
+
+		}
+
 	}
 }

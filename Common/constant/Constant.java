@@ -4,9 +4,6 @@
 package constant;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import common.Utilities;
 
 /**
  * @author an.son
@@ -15,6 +12,7 @@ import common.Utilities;
 public class Constant {
 
 	public static WebDriver WEBDRIVER;
+	
 	public static final String DASHBOARD_URL = "http://192.168.1.10:54001/TADashboard";
 	public static final String USERNAME = "administration";
 	public static final String PASSWORD = "";

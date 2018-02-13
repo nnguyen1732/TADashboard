@@ -4,9 +4,9 @@
 package Dashboard;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 import Dashboard.DataObjects.Account;
+import Dashboard.DataObjects.DataType;
 import Dashboard.DataObjects.REPO;
 import common.Utilities;
 
@@ -37,12 +37,13 @@ public class DA_CEA_NP extends TestBase {
 		mainpage.gotoDashboardAddPage();
 		mainpage.setTextToAddPageTxtPageName(pageName);
 		mainpage.clickAddPageBtn();
-		String actualNextName = mainpage.getNextTagNameByIndex(2);	
+		String actualNextName = mainpage.getNextTagNameByIndex(2);
 		mainpage.deleteMultiPage(2);
-		Assert.assertEquals(actualNextName, pageName, "The new page is not exactly created next to the right of \"Overview\" tag");
+		Assert.assertEquals(actualNextName, pageName,
+				"The new page is not exactly created next to the right of \"Overview\" tag");
 
 	}
-// UNCOMPLETE----------------------------------------------------------------------------------------
+
 	@Test
 	private void DAMPTC016() {
 		System.out.println(
@@ -53,17 +54,18 @@ public class DA_CEA_NP extends TestBase {
 		mainpage.gotoDashboardAddPage();
 		mainpage.setTextToAddPageTxtPageName(pageName1);
 		mainpage.clickAddPageBtn();
-		String pageName2= Utilities.UniqueObjectString("Pg_", 6);
+		String pageName2 = Utilities.UniqueObjectString("Pg_", 6);
 		mainpage.gotoDashboardAddPage();
 		mainpage.setTextToAddPageTxtPageName(pageName2);
 		mainpage.selectCbbOption(pageName1);
-		mainpage.clickAddPageBtn();	
+		mainpage.clickAddPageBtn();
 		String actualNextName = mainpage.getNextTagNameByIndex(3);
-		String expectedName = mainpage.getNextTagNameByIndex(mainpage.getTagIndexByName(pageName1)+1);
+		String expectedName = mainpage.getNextTagNameByIndex(mainpage.getTagIndexByName(pageName1) + 1);
 		mainpage.deleteMultiPage(3);
-		Assert.assertEquals(actualNextName, expectedName, "The new page is not exactly created next to the right of \"Overview\" tag");
+		Assert.assertEquals(actualNextName, expectedName,
+				"The new page is not exactly created next to the right of \"Overview\" tag");
 	}
-	
+
 	@Test
 	private void DAMPTC017() {
 		System.out.println(
@@ -82,22 +84,29 @@ public class DA_CEA_NP extends TestBase {
 		mainpage.deleteMultiPage(2);
 		Assert.assertTrue(pagepresent, "The new page does not display with other username with different account type");
 	}
-	
+
 	@Test
 	private void DAMPTC018() {
 		System.out.println(
 				"DA_MP_TC016_Verify the newly added main parent page is positioned at the location specified as set with \"Displayed After\" field of \"New Page\" form on the main page bar/\"Parent Page\" dropped down menu");
-		String pageName= Utilities.UniqueObjectString("Pg_", 6);
+		String pageName = Utilities.UniqueObjectString("Pg_", 6);
 		LoginPage login = new LoginPage();
 		MainPage mainpage = login.open().Login(REPO.SP.getValue(), Account.ID.getValue(), Account.BLANK.getValue());
 		mainpage.gotoDashboardAddPage();
-		mainpage.setTextToAddPageTxtPageName(pageName);
-		mainpage.clickAddPageBtn();	
-		pageName= Utilities.UniqueObjectString("Pg_", 6);
+		mainpage.addPage(pageName, DataType.BLANK.getValue(), DataType.BLANK.getValue(), DataType.BLANK.getValue(),
+				DataType.ON.getValue());
+		mainpage.clickAddPageBtn();
+		String pageName2 = Utilities.UniqueObjectString("Pg_", 6);
 		mainpage.gotoDashboardAddPage();
-		mainpage.setTextToAddPageTxtPageName(pageName);
-		mainpage.clickAddPageBtn();	
-		//String actualNextName = mainpage.getNextTagName(2);
-		//Assert.assertEquals(actualNextName, pageName, "The new page is not exactly created next to the right of \"Overview\" tag");
+		mainpage.addPage(pageName2, pageName, DataType.BLANK.getValue(), DataType.BLANK.getValue(),
+				DataType.OFF.getValue());
+		login = mainpage.Logout();
+		mainpage = login.open().Login(REPO.SP.getValue(), Account.ID_TEST.getValue(), Account.BLANK.getValue());
+		mainpage.movetoChildElement(pageName, pageName2);
+		boolean pagepresent = mainpage.isNewPagePresent(pageName2);
+		login = mainpage.Logout();
+		mainpage = login.Login(REPO.SP.getValue(), Account.ID.getValue(), Account.BLANK.getValue());
+		mainpage.deleteMultiPage(2);
+		Assert.assertTrue(pagepresent, "The new page does not display with other username with different account type");
 	}
 }

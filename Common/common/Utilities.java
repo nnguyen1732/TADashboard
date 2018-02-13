@@ -98,5 +98,14 @@ public class Utilities {
 	public static String UniqueObjectString(String entity, int number) {
 		return new String(entity.concat(randomString(number).substring(1)));
 	}
+	
+	public static boolean isNumber(String number) {
+		try {
+			Double.parseDouble(number);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 
 }

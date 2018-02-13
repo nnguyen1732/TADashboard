@@ -36,5 +36,18 @@ public class DataObjects {
 			return user;
 		}
 	}
+	
+	public static enum DataType {
+		BLANK(""), ON("on"), OFF("off");
+		private final String datatype;
+
+		DataType(final String data) {
+			datatype = data;
+		}
+
+		public String getValue() {
+			return datatype;
+		}
+	}
 
 }
