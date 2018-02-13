@@ -93,7 +93,7 @@ public class Utilities {
 	}
 
 	public static String UniqueObjectString(String entity, int number) {
-		return new String(entity.concat(randomID(number).substring(1)));
+		return new String(entity.concat(randomString(number).substring(1)));
 	}
 
 }
