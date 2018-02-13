@@ -35,8 +35,9 @@ public class DA_CEA_NP extends TestBase {
 		MainPage mainpage = login.open().Login(REPO.SP.getValue(), Account.ID.getValue(), Account.BLANK.getValue());
 		mainpage.gotoDashboardAddPage();
 		mainpage.setTextToAddPageTxtPageName(pageName);
-		mainpage.clickAddPageBtn();	
-		String actualNextName = mainpage.getNextTagNameByIndex(2);
+		mainpage.clickAddPageBtn();
+		String actualNextName = mainpage.getNextTagNameByIndex(2);	
+		mainpage.deleteMultiPage(2);
 		Assert.assertEquals(actualNextName, pageName, "The new page is not exactly created next to the right of \"Overview\" tag");
 
 	}
